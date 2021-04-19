@@ -1,0 +1,5 @@
+{% for file in files %}
+    <a href="{% url 'app:show_file' name=file.name%}">
+        <button>{{ file.name }}</button>
+    </a>
+{% endfor %}

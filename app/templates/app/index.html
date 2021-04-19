@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    <div class="grid-container">
+        <div class="grid-item menu">
+            {% include 'app/nav_section.html' %}
+        </div>
+        <div class="grid-item file-selection">
+            {% include 'app/file_section.html' %}
+        </div>
+        <div class="grid-item program-code">
+            {% include 'app/code_section.html' %}
+        </div>
+        <div class="grid-item focus-elements">
+            {% include 'app/compile_section.html' %}
+        </div>
+        <div class="grid-item container-tab-data">
+            {% include 'app/tab_section.html' %}
+        </div>
+    </div>
+{% endblock %}
