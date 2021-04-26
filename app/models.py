@@ -37,6 +37,9 @@ class Directory(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     parent_directory = models.ForeignKey("Directory", on_delete=models.CASCADE, null=True, blank=True)
+    availability = models.BooleanField(default=True)
+    #path
+    #level
     last_updated = models.DateTimeField(auto_now=True)
     validity = models.BooleanField(default=True)
 
@@ -51,6 +54,7 @@ class File(models.Model):
     directory = models.ForeignKey("Directory", on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField()
+    availability = models.BooleanField(default=True)
     last_updated = models.DateTimeField(auto_now=True)
     validity = models.BooleanField(default=True)
 
@@ -59,8 +63,7 @@ class File(models.Model):
 
 
 class SectionCategory(models.Model):
-    category = models.CharField(max_length=20,
-    choices=CATEGORY_CHOICES)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     last_updated = models.DateTimeField(auto_now=True)
     validity = models.BooleanField(default=True)
 
@@ -98,6 +101,8 @@ class FileSection(models.Model):
     file = models.ForeignKey(File, on_delete=models.CASCADE)
     parent_section = models.ForeignKey("FileSection", on_delete=models.CASCADE, null=True, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
+    #sectbegin
+    #sectend
     validity = models.BooleanField(default=True)
 
     def __str__(self):

@@ -2,11 +2,22 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'app:delete' %}" method="POST">
+<form action="{% url 'app:delete_file' %}" method="POST">
 {% csrf_token %}
 {% for file in files %}
-    <input type="radio" name="file" id="{{ file.name }}" value="{{ file.id }}">
+    <input type="radio" name="file" id="{{ file.name }}" value="{{ file.name }}">
     <label for="xxx{{ forloop.counter }}">{{ file.name }}</label><br>
+{% endfor %}
+<input type="submit" value="Delete">
+</form>
+
+<h1>delete a directory:</h1>
+
+<form action="{% url 'app:delete_directory' %}" method="POST">
+{% csrf_token %}
+{% for directory in directories %}
+    <input type="radio" name="directory" id="{{ directory.name }}" value="{{ directory.name }}">
+    <label for="xxx{{ forloop.counter }}">{{ directory.name }}</label><br>
 {% endfor %}
 <input type="submit" value="Delete">
 </form>

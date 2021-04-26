@@ -2,14 +2,13 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from .models import User, Directory, File, SectionCategory, Status, StatusData, FileSection
-from .forms import FileForm
+from .forms import FileForm, DirectoryForm
 
 # Create your views here.
 
 def index_view(request):
-    files = File.objects.all()
     context = {
-        'files': files,
+        'files': File.objects.filter(availability=True),
         'file_content': ''
     }
     return render(request, 'app/index.html', context)
@@ -30,6 +29,21 @@ def add_file_view(request):
     return render(request, "app/add_file.html", context)
 
 
+def add_directory_view(request):
+    form = DirectoryForm()
+    if request.method == "POST":
+        form = DirectoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/app/')
+    # else:
+
+    context = {
+        'form': form
+    }
+    return render(request, "app/add_directory.html", context)
+
+
 def show_file_view(request, name):
     file_obj = get_object_or_404(File, name=name)
 
@@ -39,42 +53,67 @@ def show_file_view(request, name):
 
     context = {
         'file_content': file_content,
-        'files': File.objects.all(),
+        'files': File.objects.filter(availability=True),
     }
     return render(request, "app/index.html", context)
 
 
 def delete_view(request):
-    files = File.objects.all()
     context = {
-        'files': files,
+        'files': File.objects.filter(availability=True),
+        'directories': Directory.objects.filter(availability=True),
     }
     return render(request, "app/delete.html", context)
     
 
 def delete_file(request):
+    files = File.objects.filter(availability=True)
+    context = {
+        'files': files,
+        'file_content': ''
+    }
+
     try:
         selected_file = File.objects.get(name=request.POST['file'])
-        # selected_file = file_obj.choice_set.get(pk=request.POST['choice'])
     except (KeyError, File.DoesNotExist):
-        # Redisplay the question voting form.
-        # return render(request, 'polls/detail.html', {
-        #     'question': question,
-        #     'error_message': "You didn't select a choice.",
-        # })
-        print("didnt select a choice")
+        print("Didn'tt select a choice")
+        return render(request, 'app/index.html', context)
     else:
         #delete file
+        selected_file.availability = False
+        selected_file.save()
+
+        
+        # return render(request, 'app/index.html', context)
+
+        # important!
         return HttpResponseRedirect('/app/')
 
 
-# def detail(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'polls/detail.html', {'question': question})
+def delete_directory(request):
+    directories = Directory.objects.filter(availability=True)
+    context = {
+        'files': File.objects.filter(availability=True),
+        'file_content': ''
+    }
 
-# def results(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     return render(request, 'polls/results.html', {'question': question})
+    try:
+        selected_directory = Directory.objects.get(name=request.POST['directory'])
+    except (KeyError, Directory.DoesNotExist):
+        print("didnt select a choice")
+        return render(request, 'app/index.html', context)
+    else:
+        #delete directory
+        selected_directory.availability = False
+        selected_directory.save()
+        
+        # return render(request, 'app/index.html', context)
+
+        # important!
+        return HttpResponseRedirect('/app/')
+
+
+
 
 # def vote(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
