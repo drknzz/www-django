@@ -38,13 +38,17 @@ class Directory(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     parent_directory = models.ForeignKey("Directory", on_delete=models.CASCADE, null=True, blank=True)
     availability = models.BooleanField(default=True)
-    #path
-    #level
+    level = models.IntegerField(default=0)
     last_updated = models.DateTimeField(auto_now=True)
     validity = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.parent_directory != None:
+            self.level = self.parent_directory.level + 1
+        return super(Directory, self).save(*args, **kwargs)
 
 
 class File(models.Model):

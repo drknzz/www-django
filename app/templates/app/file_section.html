@@ -1,5 +1,21 @@
-{% for file in files %}
-    <a href="{% url 'app:show_file' name=file.name%}">
-        <button>{{ file.name }}</button>
-    </a>
+{% for dir in dirs_and_files %}
+    <button class="white">
+        {% for _ in dir.1 %}
+            &emsp;
+        {% endfor %}
+        {{ dir.0.name }}/
+    </button>
+
+    {% for file in dir.2 %}
+        <a href="{% url 'app:show_file' name=file.name %}">
+            <button>
+            {% for _ in dir.1 %}
+                &emsp;
+            {% endfor %}
+
+                &emsp;|
+            {{ file.name }}
+            </button>
+        </a>
+    {% endfor %}
 {% endfor %}

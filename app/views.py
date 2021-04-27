@@ -3,13 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from .models import User, Directory, File, SectionCategory, Status, StatusData, FileSection
 from .forms import FileForm, DirectoryForm
+from .functions import dir_array, dir_array_levels, file_array, merge_dirs_files, get_dirs_and_files, delete_dir
 
 # Create your views here.
 
 def index_view(request):
     context = {
-        'files': File.objects.filter(availability=True),
-        'file_content': ''
+        'dirs_and_files': get_dirs_and_files(),
+        'file_content': 'Choose a file!'
     }
     return render(request, 'app/index.html', context)
 
@@ -52,8 +53,8 @@ def show_file_view(request, name):
     f.close()
 
     context = {
+        'dirs_and_files': get_dirs_and_files(),
         'file_content': file_content,
-        'files': File.objects.filter(availability=True),
     }
     return render(request, "app/index.html", context)
 
@@ -67,49 +68,25 @@ def delete_view(request):
     
 
 def delete_file(request):
-    files = File.objects.filter(availability=True)
-    context = {
-        'files': files,
-        'file_content': ''
-    }
-
     try:
         selected_file = File.objects.get(name=request.POST['file'])
     except (KeyError, File.DoesNotExist):
-        print("Didn'tt select a choice")
-        return render(request, 'app/index.html', context)
+        print("Didn't select a choice")
+        return HttpResponseRedirect('/app/')
     else:
-        #delete file
         selected_file.availability = False
         selected_file.save()
-
-        
-        # return render(request, 'app/index.html', context)
-
-        # important!
         return HttpResponseRedirect('/app/')
 
 
 def delete_directory(request):
-    directories = Directory.objects.filter(availability=True)
-    context = {
-        'files': File.objects.filter(availability=True),
-        'file_content': ''
-    }
-
     try:
         selected_directory = Directory.objects.get(name=request.POST['directory'])
     except (KeyError, Directory.DoesNotExist):
-        print("didnt select a choice")
-        return render(request, 'app/index.html', context)
+        print("Didn't select a choice")
+        return HttpResponseRedirect('/app/')
     else:
-        #delete directory
-        selected_directory.availability = False
-        selected_directory.save()
-        
-        # return render(request, 'app/index.html', context)
-
-        # important!
+        delete_dir(selected_directory)
         return HttpResponseRedirect('/app/')
 
 

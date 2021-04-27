@@ -1,3 +1,7 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
 <h1>delete a file:</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -21,3 +25,5 @@
 {% endfor %}
 <input type="submit" value="Delete">
 </form>
+
+{% endblock %}
