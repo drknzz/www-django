@@ -18,12 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from app.views import index_view, add_file_view, show_file_view
+from app.views import auth_user
 
 urlpatterns = [
-    path('polls/', include('polls.urls')),
     path('app/', include('app.urls')),
     path('admin/', admin.site.urls),
+    path('auth_user/', auth_user, name='auth_user'),
+    path('', include('django.contrib.auth.urls')),
 ] 
 
 if settings.DEBUG:

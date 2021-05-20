@@ -1,0 +1,20 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% if not user.is_authenticated %}
+<h1>LOGIN PAGE</h1>
+
+<form method='POST' enctype="multipart/form-data"> {% csrf_token %}
+    {{ form.as_p}}
+    <button type="submit">Login</button>
+</form>
+
+{% else %}
+
+<h1>CURRENTLY LOGGED AS {{ user.get_username }}</h1>
+<h2>Click <a href="/logout">here</a> to logout</h2>
+
+{% endif %}
+
+{% endblock %}

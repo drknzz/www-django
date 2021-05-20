@@ -1,0 +1,14 @@
+[wp] [Alt-Ergo] Goal typed_my_cosine2_assert : Failed
+characters 4-15:typing error: undefined symbol abs_real
+
+ (Stronger, 4 warnings)
+[wp] [Alt-Ergo] Goal typed_my_cosine2_post_2 : Failed
+characters 4-15:typing error: undefined symbol abs_real
+
+ (Stronger, 6 warnings)
+[wp] [Alt-Ergo] Goal typed_my_cosine2_post : Failed
+characters 4-15:typing error: undefined symbol abs_real
+
+ (Stronger, 6 warnings)
+[wp] Proved goals:    0 / 3
+Alt-Ergo:        0  (failed: 3)

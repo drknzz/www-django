@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    # 'polls.apps.PollsConfig',
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +50,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    ('django.contrib.auth.backends.ModelBackend'),
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -131,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #relative url for browser
 MEDIA_URL = '/media/'
+
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/auth_user"
+LOGOUT_REDIRECT_URL = "/login"

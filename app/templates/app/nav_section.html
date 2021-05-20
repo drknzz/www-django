@@ -1,6 +1,7 @@
 <ul>
     <li><a href="{% url 'app:add_file'%}">ADD FILE</a></li>
     <li><a href="{% url 'app:add_directory'%}">ADD DIRECTORY</a></li>
-    <li><a href="{% url 'app:delete'%}">DELETE</a></li>
-    <li><a href="#">COMPILE</a></li>
+    <li><a id="id_delete">DELETE</a></li>
+    <li><a onclick="compile()">COMPILE</a></li>
+    <li><a href="{% url 'logout'%}">LOGOUT</a></li>
 </ul>

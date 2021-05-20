@@ -1,14 +1,47 @@
 <div class="tabs">
-    <button class="active">PROVERS</button>
-    <button>VCs</button>
-    <button>RESULT</button>
+    <a href="{% url 'app:show_tab' tab='provers' %}">
+        {% if active_tab == "provers" %} <button class="active"> {% else %} <button>{% endif %}
+            PROVERS
+        </button>
+    </a>
+    <a href="{% url 'app:show_tab' tab='vcs'%}">
+        {% if active_tab == "vcs" %} <button class="active"> {% else %} <button>{% endif %}
+            VCs
+        </button>
+    </a>
+    <a href="{% url 'app:show_tab' tab='result'%}">
+        {% if active_tab == "result" %} <button class="active"> {% else %} <button>{% endif %}
+            RESULT
+        </button>
+    </a>
 </div>
-<div class="acitve">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere consequuntur rerum nulla, magnam sit
-        libero error suscipit repellendus perspiciatis ipsam eum quo doloremque adipisci, fuga ipsa. Deserunt
-        quod assumenda nostrum.
-    </p>
+<div class="tabs_content">
+    {% if active_tab == "provers" %} <div class="active"> {% else %} <div>{% endif %}
+
+        <form action="{% url 'app:save_prover' %}" method="POST">
+            {% csrf_token %}
+            {% for option in options %}
+                <input type="radio" name="prover" id="{{ option }}" value="{{ option }}" {% if option == prover %}checked{% endif %}>{{ option }}<br>
+            {% endfor %}
+            <input type="submit" value="Select">
+        </form>
+
+    </div>
+
+    {% if active_tab == "vcs" %} <div class="active"> {% else %} <div>{% endif %}
+        <form action="{% url 'app:save_vcs' %}" method="POST">
+            {% csrf_token %}
+            <input type="checkbox" name="rte" {% if rte == True %}checked{% endif %}>-wp-rte
+            {% for x,y in form.fields.vcs.choices %}
+            <input type="checkbox" name="vcs" id="{{x}}" value="{{ y }}" {% if y in vcs %}checked{% endif %}>{{ y }}
+            {% endfor %}
+            <input type="submit" value="Apply">
+        </form>
+    </div>
+
+    {% if active_tab == "result" %} <div class="active result"> {% else %} <div>{% endif %}
+        {% if chosen_file != None %}
+            <p>{{ result }}</p>
+        {% endif %}
+    </div>
 </div>
-<div></div>
-<div></div>
-<div></div>

@@ -1,5 +1,5 @@
 {% for dir in dirs_and_files %}
-    <button class="white">
+    <button id="dir_name_{{dir.0.name}}" class="white" onclick="deleteDirectory('{{dir.0.name}}')">
         {% for _ in dir.1 %}
             &emsp;
         {% endfor %}
@@ -7,15 +7,13 @@
     </button>
 
     {% for file in dir.2 %}
-        <a href="{% url 'app:show_file' name=file.name %}">
-            <button>
-            {% for _ in dir.1 %}
-                &emsp;
-            {% endfor %}
+        <button id="file_name_{{file.name}}" onclick="fileClick('{{file.name}}')">
+        {% for _ in dir.1 %}
+            &emsp;
+        {% endfor %}
 
-                &emsp;|
-            {{ file.name }}
-            </button>
-        </a>
+            &emsp;|
+        {{ file.name }}
+        </button>
     {% endfor %}
 {% endfor %}

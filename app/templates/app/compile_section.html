@@ -1,6 +1,3 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus mollitia
-    nesciunt natus modi enim optio iste consectetur sapiente eos? Pariatur sint vel dolorum excepturi
-    mollitia
-    natus temporibus totam nobis? Magnam accusamus magni in molestias quasi omnis sequi nesciunt similique
-    rerum!
-</p>
+{% for x in compile_result %}
+    {% if x.0 != '' %}<div class="frama_{{x.0}}"><p><abbr title='{{x.1}} {% if x.3 != "" %}- line {{x.3}}{% endif %}'>{{x.2}}</abbr></p></div>{% endif %}
+{% endfor %}

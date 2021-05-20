@@ -15,7 +15,9 @@
 html {
   font-size: 16px;
   min-width: 500px;
-  background-color: var(--color-background);
+  background: #12c2e9;
+  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9); 
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
 }
 
 body {
@@ -25,6 +27,11 @@ body {
 
 a {
   text-decoration: none;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 code {
@@ -57,14 +64,51 @@ code {
 }
 
 .focus-elements {
-  overflow: auto;
+  overflow-y: auto;
   background-color: var(--color-focus-elements);
   padding: 2% 2%;
+}
+
+/* .focus-elements div:nth-of-type(odd) {
+  color: white;
+} */
+
+.focus-elements div.frama_Valid {
+  color: blue;
+}
+
+.focus-elements div.frama_Invalid {
+  color: red;
+}
+
+.focus-elements div.frama_Timeout {
+  color: orangered;
+}
+
+.focus-elements div.frama_Unknown {
+  color:yellowgreen;
+}
+
+.focus-elements div.frama_Counterexample {
+  color: purple;
+}
+
+.focus-elements div.frama_Proved {
+  color: green;
+}
+
+.focus-elements div.frama_Unchecked {
+  color: white;
+}
+
+abbr[title] {
+  text-decoration: none;
 }
 
 .container-tab-data {
   background-color: var(--color-container-tab-data);
   grid-column: 2/4;
+  overflow-y: auto;
 }
 
 .container-tab-data p {
@@ -86,12 +130,34 @@ code {
   cursor: pointer;
 }
 
+.tabs button a {
+  display: block;
+}
+
 .tabs button:nth-child(1) {
   margin-left: 5%;
 }
 
-.tabs .active {
+.tabs button.active {
   background-color: var(--color-tab-active);
+}
+
+/* .tabs_content {
+  overflow-y: auto;
+} */
+
+.tabs_content div {
+  /* overflow-y: auto; */
+  display: none;
+}
+
+.tabs_content div.active {
+  display: block;
+  overflow-y: auto;
+}
+
+.tabs_content div.active.result {
+    white-space: pre-wrap;
 }
 
 .menu ul {
@@ -123,6 +189,10 @@ code {
 
 .menu li a:hover {
   color: var(--color-white);
+}
+
+.menu li a.deletion_active {
+  color: red;
 }
 
 .file-selection button {
