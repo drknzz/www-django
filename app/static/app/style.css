@@ -9,7 +9,6 @@
   --color-tab-active: rgb(120, 184, 133);
   --color-white: white;
   --color-background: rgb(66, 158, 127);
-  /* --color-background: white; */
 }
 
 html {
@@ -68,10 +67,6 @@ code {
   background-color: var(--color-focus-elements);
   padding: 2% 2%;
 }
-
-/* .focus-elements div:nth-of-type(odd) {
-  color: white;
-} */
 
 .focus-elements div.frama_Valid {
   color: blue;
@@ -142,12 +137,7 @@ abbr[title] {
   background-color: var(--color-tab-active);
 }
 
-/* .tabs_content {
-  overflow-y: auto;
-} */
-
 .tabs_content div {
-  /* overflow-y: auto; */
   display: none;
 }
 
@@ -203,7 +193,6 @@ abbr[title] {
   cursor: pointer;
   text-align: left;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   font-size: 1.5em;
   padding: 2%;
