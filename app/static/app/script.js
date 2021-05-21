@@ -65,8 +65,6 @@ function deleteDirectory(dirName) {
 
 
 function toggleDisplay(id) {
-    console.log("essa");
-    console.log(id);
     if ($('#' + id).css('display') == 'block')
         $('#' + id).css('display', 'none');
     else

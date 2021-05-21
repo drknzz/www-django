@@ -244,7 +244,7 @@ def html_tree(owner):
     tree = ""
     
     for dir in dirs_and_files:
-        tree += '<button id="dir_name_' + dir[0].name + '" class="white" onclick="deleteDirectory(' + dir[0].name + ')">'
+        tree += """<button id="dir_name_""" + dir[0].name + """" class="white" onclick="deleteDirectory('""" + dir[0].name + """')">"""
 
         for _ in dir[1]:
             tree += '&emsp;'
@@ -253,7 +253,7 @@ def html_tree(owner):
         tree += '</button>'
 
         for file in dir[2]:
-            tree += '<button id="file_name_' + file.name + '" onclick="fileClick(' + file.name + ')">'
+            tree += """<button id="file_name_""" + file.name + """" onclick="fileClick('""" + file.name + """')">"""
 
             for _ in dir[1]:
                 tree += '&emsp;'
