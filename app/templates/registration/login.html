@@ -3,6 +3,7 @@
 {% block content %}
 
 {% if not user.is_authenticated %}
+<div class="center text-center">
 <h1>LOGIN PAGE</h1>
 
 <form method='POST' enctype="multipart/form-data"> {% csrf_token %}
@@ -18,3 +19,4 @@
 {% endif %}
 
 {% endblock %}
+</div>

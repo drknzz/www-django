@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+qdj8iwr-b_5dqa+d@yyhp@6po$^%mp-bz(tgot2!x08=+pgo+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = False
+STATIC_ROOT = Path.home() / "nginx" / "static"
+ALLOWED_HOSTS = ['students.mimuw.edu.pl', 'localhost', '127.0.0.1']
 
 
 # Application definition
